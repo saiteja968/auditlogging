@@ -18,13 +18,6 @@ namespace Centauri.AuditLogging.EntityFramework.Repositories
             DbContext = dbContext;
         }
 
-        public virtual async Task<PagedList<TAuditLog>> GetAsync(int page = 1, int pageSize = 10)
-        {
-            var pagedList = new PagedList<TAuditLog>();
-
-            var auditLogs = await DbContext.AuditLog
-                .PageBy(x => x.Id, page, pageSize)
-                .ToListAsync();
 
             pagedList.Data.AddRange(auditLogs);
             pagedList.PageSize = pageSize;
